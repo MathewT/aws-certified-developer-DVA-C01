@@ -43,7 +43,7 @@ to access the AWS account.
 
 
 ## IAM Users
-1. Users are AWS identities associated to people who access the console or account resources
+1. Users are AWS identities associated to **people** who access the console or account resources
 1. IAM is universal, does not apply to regions
 1. New users have NO permissions when first created, cannot access any resources
 1. New users are assigned Access Key ID and Secret Access Key when first created
@@ -103,6 +103,11 @@ A group is a collection of users under one set of permissions (policies)
 This policy grants permission to perform all DynamoDB operations on the Books table in the specified account.
 
 ## IAM Roles
+1. IAM roles are a secure way to grant permissions to entities that you trust.  Examples of entities include: 
+	* IAM user in another account
+	* App code in EC2 instance that needs to perform actions on AWS resources
+	* An AWS service that needs to act on resources in your account to provide its features
+	* Users from a corporate directory who use identity federation with SAML
 1. A role is an AWS identity with permission policies (access to actions and resources) that determine what the identity 
 can and cannot do in AWS
 1. Roles allow AWS services to interact with each other (e.g. EC2 application can access an S3 bucket or DynamoDB table)
