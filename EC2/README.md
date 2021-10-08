@@ -2,7 +2,7 @@
 
 ## EC2 Options
 
-**On Demand**:  Fixed rate by the hour with no commitments.
+**On Demand**:  Fixed rate by the hour or second with no commitments.
   * Usage scenarios:  
     * Flexibility; no long term commitments;
     * Short term applications; spiky or unpredictable workloads that cannot be interrupted
@@ -17,6 +17,9 @@
     * Applications that are in steady state or predictable usage
     * Users are able to make up front payments for 1 or 3 years
     * E.g. You have 10K "regular" users requiring 2 large instances but require extra instances (on demand) for 
+    * Standard Reserve Instances, you cannot change size
+    * Convertable Reserve Instances, you can convert to instance type of equal or greater value
+    * Scheduled Reserve Instances, launch within a time window that you specify, fraction of a day, week or month
     Black Friday traffic
 
 **Spot**:  bid whatever price you want for instance capacity; if the market price
@@ -35,6 +38,12 @@
     * Dedicated servers needed for existing per-server license
     * Regulatory requirements that forbid multi-tenant virtualization
     * Can be purchased On Demand (hourly) or Reserved 
+
+**Savings Plan** 
+  * Save up to 72% regardless of instance type or region
+  * Commit to 1 or 3 years of specific amount of compute power measured in $/hour
+  * Not just EC2.  Includes serverless like Lambda or Fargate
+
 
 
 ## EC2 Instance Families
