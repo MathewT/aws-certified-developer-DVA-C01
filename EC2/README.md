@@ -2,7 +2,7 @@
 
 ## EC2 Options
 
-1. **On Demand**:  Fixed rate by the hour with no commitments.
+**On Demand**:  Fixed rate by the hour with no commitments.
   * Usage scenarios:  
     * Flexibility; no long term commitments;
     * Short term applications; spiky or unpredictable workloads that cannot be interrupted
@@ -12,14 +12,14 @@
       Use on demand instances to supplement reserved instances during usage spikes
 
 
-1. **Reserved**:  reserve capacity  1 or 3 year terms.
+**Reserved**:  reserve capacity  1 or 3 year terms.
   * Usage scenarios:
     * Applications that are in steady state or predictable usage
     * Users are able to make up front payments for 1 or 3 years
     * E.g. You have 10K "regular" users requiring 2 large instances but require extra instances (on demand) for 
     Black Friday traffic
 
-1. **Spot**:  bid whatever price you want for instance capacity; if the market price
+**Spot**:  bid whatever price you want for instance capacity; if the market price
    goes above your bid, you are given an hour notice and Amazon terminates the
    instance.
    * Usage scenarios:
@@ -30,7 +30,7 @@
      * **Spot instances terminated by AWS, no charge for the hour**
      * **Spot instances terminated by you, you are charged for the hour**
 
-1. **Dedicated hosts**:  Dedicated physical EC2 instances
+**Dedicated hosts**:  Dedicated physical EC2 instances
   * Usage scenarios:
     * Dedicated servers needed for existing per-server license
     * Regulatory requirements that forbid multi-tenant virtualization
