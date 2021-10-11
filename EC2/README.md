@@ -68,9 +68,6 @@ Accelerated computing instances use hardware accelerators, or co-processors, to 
 
 Storage optimized instances are designed for workloads that require high, sequential read and write access to very large data sets on local storage. They are optimized to deliver tens of thousands of low-latency, random I/O operations per second (IOPS) to applications.
 
-
-
-
 ## EBS Elastic Block storage
   1. S3 is object storage.  
   1. EBS is block storage for creating **storage volumes** that
