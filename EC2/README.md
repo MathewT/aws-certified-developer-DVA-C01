@@ -76,22 +76,29 @@ Storage optimized instances are designed for workloads that require high, sequen
     create a file system on top of these volumes, run a database or use them in
     any way you would use a storage volume block device.   
   1. EBS volumes are placed in specific availability zones where they are automatically
-    replicated.
+    replicated within the AZ.
   1. Think: Disk in the cloud, located in a specific AZ
   1. One EC2 can attach multiple EBS volumes
   1. An EBS volume can only be mounted by one single EC2 instance; you cannot mount one EBS volume to 
   multiple EC2 instances; use EFS instead
+  1. Dynamically scalable.  Increase capacity and/or change volume type with no downtime or performance impact to live systems. 
 
 **EBS Disk Types**
   1. GP2 - General Purpose SSD
-    * Designed for 99.999 availability
-    * Ratio of 3 IOPS per GB, up to 10,000 IOPS, burst to 3000 for short 
-    periods for volumes under 1GB
+    * Designed for 99.9 availability
+    * Ratio of 3 IOPS per GB, up to 16,000 IOPS, burst to 3000 for short 
+    periods for volumes under 1TB
     * **Bootable volume**
   1. IO1 - Provisioned IOPS
     * For I/O intensive applications, large relational or NoSQL databases,
-    * For more than 10,000 IOPS
+    * For more than 64,000 IOPS per volume, 50 IOPS per GiB 
     * **Bootable volume**
+    * 99.9% durability
+  1. IO2 - Latest Generation of Provisioned IOPS (SSD)
+    * More durable and performant
+    * Same cost as IO1
+    * 500 IOPS per GiB
+    * 99.999% durability
   1. ST1 Magnetic HDD
     * Large amounts of sequential data (data written in squence)
     * Big data
@@ -100,11 +107,15 @@ Storage optimized instances are designed for workloads that require high, sequen
     * Not for randomly stored data requiring disk seeks
     * Sequential throughput optimized
     * **Cannot be a boot volume**
+    * Frequently accessed large data sets, throughput intensive workloads (ETL)
+    * 99.9 durability
   1. SC1 Cold HDD
     * Lower cost than ST1
     * For infrequently accessed workloads
+    * Workloads in which throughput performance is not a concern
     * File server
     * **Cannot be a boot volume**
+    * 99.9% durability
   1. Magnetic Standard
     * Lowest cost of all EBS volume types that are *bootable*
     * **Bootable volume**
