@@ -2,7 +2,7 @@
 
 ## EC2 Options
 
-**On Demand**:  Fixed rate by the hour with no commitments.
+**On Demand**:  Fixed rate by the hour or second with no commitments.
   * Usage scenarios:  
     * Flexibility; no long term commitments;
     * Short term applications; spiky or unpredictable workloads that cannot be interrupted
@@ -17,6 +17,9 @@
     * Applications that are in steady state or predictable usage
     * Users are able to make up front payments for 1 or 3 years
     * E.g. You have 10K "regular" users requiring 2 large instances but require extra instances (on demand) for 
+    * Standard Reserve Instances, you cannot change size
+    * Convertable Reserve Instances, you can convert to instance type of equal or greater value
+    * Scheduled Reserve Instances, launch within a time window that you specify, fraction of a day, week or month
     Black Friday traffic
 
 **Spot**:  bid whatever price you want for instance capacity; if the market price
@@ -36,11 +39,34 @@
     * Regulatory requirements that forbid multi-tenant virtualization
     * Can be purchased On Demand (hourly) or Reserved 
 
+**Savings Plan** 
+  * Save up to 72% regardless of instance type or region
+  * Commit to 1 or 3 years of specific amount of compute power measured in $/hour
+  * Not just EC2.  Includes serverless like Lambda or Fargate
+
+
 
 ## EC2 Instance Families
 
-![EC2 Instance Families](https://github.com/MathewT/aws-certified-developer/blob/master/EC2/instance-families.png)
+### General Purpose
 
+General purpose instances provide a balance of compute, memory and networking resources, and can be used for a variety of diverse workloads. These instances are ideal for applications that use these resources in equal proportions such as web servers and code repositories. 
+
+### Compute Optimized
+
+Compute Optimized instances are ideal for compute bound applications that benefit from high performance processors. Instances belonging to this family are well suited for batch processing workloads, media transcoding, high performance web servers, high performance computing (HPC), scientific modeling, dedicated gaming servers and ad server engines, machine learning inference and other compute intensive applications.
+
+### Memory Optimized
+
+Memory optimized instances are designed to deliver fast performance for workloads that process large data sets in memory.
+
+### Accelerated Computing
+
+Accelerated computing instances use hardware accelerators, or co-processors, to perform functions, such as floating point number calculations, graphics processing, or data pattern matching, more efficiently than is possible in software running on CPUs.
+
+### Storage Optimized
+
+Storage optimized instances are designed for workloads that require high, sequential read and write access to very large data sets on local storage. They are optimized to deliver tens of thousands of low-latency, random I/O operations per second (IOPS) to applications.
 
 ## EBS Elastic Block storage
   1. S3 is object storage.  
@@ -50,22 +76,29 @@
     create a file system on top of these volumes, run a database or use them in
     any way you would use a storage volume block device.   
   1. EBS volumes are placed in specific availability zones where they are automatically
-    replicated.
+    replicated within the AZ.
   1. Think: Disk in the cloud, located in a specific AZ
   1. One EC2 can attach multiple EBS volumes
   1. An EBS volume can only be mounted by one single EC2 instance; you cannot mount one EBS volume to 
   multiple EC2 instances; use EFS instead
+  1. Dynamically scalable.  Increase capacity and/or change volume type with no downtime or performance impact to live systems. 
 
 **EBS Disk Types**
   1. GP2 - General Purpose SSD
-    * Designed for 99.999 availability
-    * Ratio of 3 IOPS per GB, up to 10,000 IOPS, burst to 3000 for short 
-    periods for volumes under 1GB
+    * Designed for 99.9 availability
+    * Ratio of 3 IOPS per GB, up to 16,000 IOPS, burst to 3000 for short 
+    periods for volumes under 1TB
     * **Bootable volume**
   1. IO1 - Provisioned IOPS
     * For I/O intensive applications, large relational or NoSQL databases,
-    * For more than 10,000 IOPS
+    * For more than 64,000 IOPS per volume, 50 IOPS per GiB 
     * **Bootable volume**
+    * 99.9% durability
+  1. IO2 - Latest Generation of Provisioned IOPS (SSD)
+    * More durable and performant
+    * Same cost as IO1
+    * 500 IOPS per GiB
+    * 99.999% durability
   1. ST1 Magnetic HDD
     * Large amounts of sequential data (data written in squence)
     * Big data
@@ -74,11 +107,15 @@
     * Not for randomly stored data requiring disk seeks
     * Sequential throughput optimized
     * **Cannot be a boot volume**
+    * Frequently accessed large data sets, throughput intensive workloads (ETL)
+    * 99.9 durability
   1. SC1 Cold HDD
     * Lower cost than ST1
     * For infrequently accessed workloads
+    * Workloads in which throughput performance is not a concern
     * File server
     * **Cannot be a boot volume**
+    * 99.9% durability
   1. Magnetic Standard
     * Lowest cost of all EBS volume types that are *bootable*
     * **Bootable volume**
