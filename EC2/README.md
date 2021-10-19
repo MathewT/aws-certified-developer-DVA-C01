@@ -202,12 +202,17 @@ outbound rules for those same ports/protocols are also created *even if not pres
   - By default, both Instance store or EBS root volumes will be deleted on instance termination but with EBS backed volumes, you can tell AWS to keep the root volume.  Not with Instance Store root volumes.
   
 ## Elastic Load Balancers (ELB)
-1. Application Load Balancers
-  * Load balance at Layer 7, application layer
+1. Application Load Balancers (HTTP or HTTPS)
+  * Load balance at Layer 7, application layer, application aware
   * **AWS preferred load balance method for HTTP/HTTPS**
-1. Classic Load Balancers
+  * Route requests to a specific web server based on request type
+1. Classic Load Balancers (HTTP/HTTPS or TCP)
   * Layer 4 load balancer 
   * Transport layer (TCP/SSL) or the application layer (HTTP/HTTPS)
+  * Also does HTTP/HTTPS based load balancing
+1. Network Load Balancer (TCP)
+1. Use X-Forwarded-For header to send the originating IP address to the web server
+1. 504 Gateway timeout error.   The web application is timing out.  Troubleshoot the web server or database.
 1. Instances monitored by ELB are either InService or OutOfService
 1. Depends on healthy threshold or unhealthy threshold and how many times the check has passed or failed consecutively
 1. Health Checks check instance health by simply calling a specified health check URI on the instances over HTTP/HTTPS
